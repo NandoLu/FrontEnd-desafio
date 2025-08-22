@@ -5,20 +5,23 @@
 }
 
 body {
-    body {
+    /* Corrigindo a duplicação e garantindo 100% da altura */
+    height: 100vh;
+    margin: 0;
+    padding: 0;
     overflow-x: hidden;
     background-color: var(--main-bg-color);
-    margin: 0; /* Adicionado para remover as margens padrão do body */
-    padding: 0; /* Adicionado para remover o padding padrão do body */
-}
 }
 
 #wrapper {
     display: flex;
+    /* Adicionando height: 100% para que o wrapper ocupe a altura total do body */
+    height: 100%; 
 }
 
 /* Sidebar */
 #sidebar-wrapper {
+    /* min-height: 100vh já está correto para preencher a tela */
     min-height: 100vh;
     width: var(--sidebar-width);
     transition: margin var(--sidebar-transition-duration);
@@ -30,12 +33,14 @@ body {
 
 /* Page Content */
 #page-content-wrapper {
-    min-width: 100vw;
+    /* Use flex-grow para que o conteúdo ocupe o espaço restante */
+    flex-grow: 1;
+    transition: margin var(--sidebar-transition-duration);
 }
 
 /* Toggle Class */
 #wrapper.toggled #sidebar-wrapper {
-    margin-left: 0;
+    margin-left: calc(-1 * var(--sidebar-width));
 }
 
 /* Responsividade */
@@ -45,8 +50,7 @@ body {
     }
 
     #page-content-wrapper {
-        min-width: 0;
-        width: 100%;
+        flex-grow: 1;
     }
 
     #wrapper.toggled #sidebar-wrapper {
